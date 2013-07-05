@@ -47,3 +47,23 @@ if ($zf2Path) {
 if (!class_exists('Zend\Loader\AutoloaderFactory')) {
     throw new RuntimeException('Unable to load ZF2. Run `php composer.phar install` or define a ZF2_PATH environment variable.');
 }
+
+
+//加载DW
+define("DW", 'vendor/Dw/library');
+if (DW) {//加载DW扩展
+	Zend\Loader\AutoloaderFactory::factory(array(
+		'Zend\Loader\StandardAutoloader' => array(
+			'namespaces' => array('Dw'=>DW)
+		)
+	));
+}
+//加载Core
+define("CORE", 'vendor/Core');
+if (CORE) {//加载自定义核心基类
+	Zend\Loader\AutoloaderFactory::factory(array(
+	'Zend\Loader\StandardAutoloader' => array(
+	'namespaces' => array('Core'=>CORE)
+	)
+	));
+}
